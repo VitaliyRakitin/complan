@@ -1,0 +1,77 @@
+
+
+%%%%% Окружения для нумерованных перечней
+\newenvironment{iItems}{\begin{enumerate}\let\AEtheenumi\theenumi{}\renewcommand{\theenumi}{\roman{enumi}}\renewcommand{\labelenumi}{(\theenumi)}}{\renewcommand{\labelenumi}{\theenumi.}\renewcommand{\theenumi}{\AEtheenumi}\end{enumerate}}	% (i), (ii), ...
+\newenvironment{azItems}{\begin{enumerate}\let\AEtheenumi\theenumi{}\renewcommand{\theenumi}{\asbuk{enumi}}\renewcommand{\labelenumi}{(\theenumi)}}{\renewcommand{\labelenumi}{\theenumi.}\renewcommand{\theenumi}{\AEtheenumi}\end{enumerate}}	% (а), (б), ...
+\newenvironment{roItems}{\begin{enumerate}\renewcommand{\labelenumi}{(\theenumi)}}{\renewcommand{\labelenumi}{\theenumi.}\end{enumerate}}	% (1), (2), ...
+\newenvironment{oItems}{\begin{roItems}\setcounter{enumi}{-1}}{\end{roItems}}	% (0), (1), ...
+%%% В КОНЦЕ ФАЙЛА ПРИВЕДЕНЫ КОМАНДЫ, КОТОРЫЕ Я НЕ УСПЕЛ ОПИСАТЬ
+
+%%%%%%%%%%%%%%%%%%%% Операторы в смысле LaTeX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator{\sign}{sgn}	% Знак (перестановки)
+\DeclareMathOperator{\sgn}{sgn}		% Сокращённая альтернатива sign
+\DeclareMathOperator{\diag}{diag}	% Диагональная матрица
+\DeclareMathOperator{\const}{const}	% Константа
+\DeclareMathOperator{\rang}{rank}         % Оператор ранга
+\DeclareMathOperator{\rank}{rank}	% На любой вкус
+\DeclareMathOperator{\diam}{diam}	% Диаметр, например, разбиения
+\DeclareMathOperator{\card}{card}	% Мощность множества
+\DeclareMathOperator{\osc}{osc}		% Осцилляция	
+\DeclareMathOperator{\grad}{grad}	% Градиент
+\DeclareMathOperator{\intS}{int}	% Внутренность множества
+\DeclareMathOperator{\ext}{ext}		% Внешность множества
+\DeclareMathOperator{\supp}{supp}
+
+
+%%%%%%% Математическая экзотика %%%%%
+\newcommand{\defequiv}{\mathbin{\vbox{\baselineskip=1.95pt\lineskiplimit=0pt\hbox{.}\hbox{.}\hbox{.}}\hskip-0.3em\equiv}} 		% вертикальное троеточие =, то есть «по определению тождественно»
+\newcommand{\rus}[1]{\mbox{\rm{\scriptsize{#1}}}}	% команда убивает зависимость русского текста в формуле от стиля абзаца (но и от стиля формулы тоже). Специально для обозначения левой и правой производных, чтобы  f'_п печаталось с прямой буквой «п» и нельзя было спутать с n
+\newcommand{\overcirc}[1]{\accentset{\circ}{#1}}	% круг над символом
+\newcommand{\overstar}[1]{\accentset{\bigstar}{#1}}	% звезда над символом
+
+%%%%%%%%%%%%%%%%%%% Глобальные текстовые команды %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\ENGs}[1]{\foreignlanguage{british}{#1}} % Переключение правил переноса и прочих правил автооформления на английский язык действует на аргумент
+\newcommand{\ENG}{\selectlanguage{british}} % Глобальное переключение (если просто начать писать на другом язык, велика вероятность появления очень больших пробелов или помещения части слова за границу листа
+\newcommand{\RUS}{\selectlanguage{russian}}
+\newcommand{\fnnsp}{\hspace{-0.4em}} % Знак сноски принято ставить до всех знаков препинания, кроме ! ? ...
+% А если есть возможность подвинуть низкий знак препинания под сноску, то для этого Андрей Викторович и придумал \fnnsp
+\let\myfootnote\footnote
+\renewcommand{\footnote}[1]{\myfootnote{\;#1}} % Сноски Андрея Виторовича
+
+%%%%%%%% Определение разрядки разреженного текста и задание красивых и притом регулируемых многоточий
+% Зачем и почему описано в блоге http://kostyrka.ru/blog
+\newdimen\ellipsiskern
+\setlength{\ellipsiskern}{.1em}
+\newdimen\ellipsiskernen
+\setlength{\ellipsiskernen}{.2em}
+\newcommand{\ldotst}{.\kern\ellipsiskern.\kern\ellipsiskern.}	% вместо ... пишем \ldotst{}
+\newcommand{\ldotse}{!\kern\ellipsiskern.\kern\ellipsiskern.}	% вместо !.. пишем \ldotse{}
+\newcommand{\ldotsq}{?\kern\ellipsiskern\kern-.11em.\kern\ellipsiskern.}	% вместо ?.. пишем \ldotsq{}
+\newcommand{\ldotsten}{.\kern\ellipsiskernen.\kern\ellipsiskernen.}		% аглийское ...
+\newcommand{\ldotspen}{.\kern\ellipsiskernen.\kern\ellipsiskernen.\kern\ellipsiskernen\kern.15em.}
+\newcommand{\ldotseen}{.\kern\ellipsiskernen.\kern\ellipsiskernen.\kern\ellipsiskernen\kern.15em!}
+\newcommand{\ldotsqen}{.\kern\ellipsiskernen.\kern\ellipsiskernen.\kern\ellipsiskernen\kern.067em?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%% ДРУГИЕ ПОЛЕЗНЫЕ КОМАНДЫ БЕЗ КОММЕНТАРИЕВ (ПОКА) %%%%%%%
+\newcounter{rad}
+\setcounter{rad}{1}
+% a_1+a_2+\ldots
+	\def\rad#1#2{\ifnum \therad < \the\numexpr(#2 + 1)\relax #1_\therad + \addtocounter{rad}{1} \rad{#1}{#2}\else \ldots \fi \setcounter{rad}{1}}
+%a_{N+1}+a_{N+2}+\ldots
+	\def\raD#1#2#3{\ifnum \therad < \the\numexpr(#2 + 1)\relax #1_{#3{\therad}} + \addtocounter{rad}{1} \raD{#1}{#2}{#3}\else \ldots \fi \setcounter{rad}{1}}
+\def\crad#1#2#3#4{\ifnum \therad < \the\numexpr(#4 + 1)\relax #1{\therad}#3 + \addtocounter{rad}{1} \crad{#1}{#2}{#3}{#4}\else \ldots +#1{#2}#3 \fi \setcounter{rad}{1}}
+\def\craD#1#2#3#4#5#6{\ifnum \therad < \the\numexpr(#4 + 1)\relax #1{#5{\therad}#6}#3 + \addtocounter{rad}{1} \craD{#1}{#2}{#3}{#4}{#5}{#6}\else \ldots +#1{#5#2#6}#3  \fi \setcounter{rad}{1}}
+%repeat argument #1 #2 times
+	\def\tfT#1#2{\ifnum \therad < \the\numexpr(#2 + 1)\relax #1\addtocounter{rad}{1} \tfT{#1}{#2}\else \fi \setcounter{rad}{1}}
+\def\dI#1#2#3#4#5#6{\ifnum \therad < \the\numexpr(#6 + 1)\relax {#1}_{\therad}{#3}_{\therad}#5\addtocounter{rad}{1} \dI{#1}{#2}{#3}{#4}{#5}{#6}\else \dots #5{#1}_{#2}{#3}_{#4}\fi \setcounter{rad}{1}}
+\def\DI#1#2#3#4#5#6{\ifnum \therad < \the\numexpr(#6 + 1)\relax #1\therad#3\therad#5\addtocounter{rad}{1} \DI{#1}{#2}{#3}{#4}{#5}{#6}\else \dots #5#1#2#3#4\fi \setcounter{rad}{1}}
+\def\iSum#1#2#3{\ifnum \therad < #3\relax {#1}_{\therad}{#2}_{\the\numexpr(#3 - \therad + 1)\relax}+ \addtocounter{rad}{1}\iSum{#1}{#2}{#3}\else {#1}_{\therad}{#2}_{1}\fi \setcounter{rad}{1}}
+\def\tms#1#2{\ifnum \therad < \the\numexpr(#2 + 1)\relax #1_\therad \ifnum \therad < \the\numexpr(#2)\relax \cdot \else \fi\addtocounter{rad}{1} \tms{#1}{#2}\else \cdots \fi \setcounter{rad}{1}}
+\def\ctms#1#2#3#4#5{\ifnum \therad < \the\numexpr(#4 + 1)\relax #1{#2\therad}#3 \ifnum \therad < \the\numexpr(#4)\relax \cdot \else \fi\addtocounter{rad}{1} \ctms{#1}{#2}{#3}{#4}{#5}\else \cdots #1{#2#5}#3\fi \setcounter{rad}{1}}
+\newcommand{\cSize}{\footnotesize}
+\newcommand{\cmt}[1]{\text{\cSize #1}}
+\newcommand{\BIggl}[1]{\left#1\vphantom{\Bigg(\frac12\Bigg)^2}\right.}
+\newcommand{\BIggr}[1]{\left.\vphantom{\Bigg(\frac12\Bigg)^2}\right#1}
