@@ -1,0 +1,32 @@
+\newpage
+\section{Лемма Жордана.}
+
+\begin{Lem}
+Пусть функция $f(z)$ определена и непрерывна на множестве $\Pi_{+} = \{z \in \C| \Im z \ge 0, |z| \ge R_0 > 0\}$.
+Положим при $R > R_0 \colon M(R) := \max\limits_{z \in \g_R} f(z)$, где $\g_R = \{z = R e^{i\theta}, 0<\theta<\pi \}$  "--- полуокружность. 
+Предположим, что $f(z)$ стремится к нулю на бесконечности так, что $\lim\limits_{R \to \infty} M(R) = 0$, тогда для $\forall \l$ справедливо соотношение
+\[
+\res\limits_{\infty, D}(f(z)e^{i \l z}) = 0.
+\]
+\end{Lem}
+
+\begin{Proof}
+Из определения вычета относительно области  
+\[\res\limits_{\infty,D} f(z)e^{i \l z} = \lim\limits_{R \to \infty} \frac{1}{2\pi i} \Gint{\g_{R}} f(z)e^{i \l z}dz.
+\]
+В указанных выше обозначениях имеем 
+\[
+\left|\Gint{\g_{R}} f(z)e^{i \l z} dz\right| = \left|\int\limits_{0}^{\pi} f(R e^{i\theta})e^{\l(i R \cos{\theta} - R \sin{\theta})} i R e^{i\theta}d\theta\right| \le 
+\int\limits_{0}^{\pi} M(R)  R e^{- \l R \sin{\theta}}d\theta
+\]
+Справедлива оценка $\sin{\theta} \ge \frac{2 \theta}{\pi}$ на $0 \le \theta \le \frac{\pi}{2}$. 
+Исходя из этого сделаем замену $\tau = \frac{2R\theta}{\pi}$, тогда
+\[
+\int\limits_{0}^{\pi} M(R)  R e^{- \l R \sin{\theta}}d\theta = 2 M(R) \int\limits_{0}^{\frac{\pi}{2}}  R e^{- \l R \sin{\theta}}d\theta \le 2 M(R) \int\limits_{0}^{\frac{\pi}{2}} R e^{-  \frac{2 \l R \theta}{\pi}}d\theta =  \pi M(R) \int\limits_{0}^{R}  e^{-  \l\tau}d\tau = \pi M(R) (1-e^{-\l R});
+\]
+Значит,
+\[
+\left|\Gint{\g_{R}} f(z)e^{i \l z} dz\right| \le  \underbrace{\pi M(R)}_{\to 0} \underbrace{(1-e^{-\l R})}_{\to 1} \Rte 0.
+\]
+
+\end{Proof}

@@ -1,0 +1,25 @@
+\newpage
+\section{Теорема о вычетах для интеграла в смысле главного значения.}
+\begin{The} 
+Пусть $D$ "--- допустимая в $\ol\C$ область, $\A = \{a_1,\dots,a_N\} \subset \ol{D}$ (если $\infty \in \ol{D}$, тогда $\infty \in \A$). \\
+$\A$ "--- конечное множество, $f \in A(D\diagdown\A)\cap C(\ol{D})$.
+Тогда
+\[
+(vp)\Gint{\partial^{+}D}f(z)dz = 2\pi i \sum\limits_{n=1}^N \res\limits_{a_n , D} f(z).
+\]
+То есть интеграл в смысле главного значения существует, если и только если выечеты в каждой точке из $\A$ относительно области $D$ существуют. В таком случае данное равенство выполняется.
+\end{The}
+
+\begin{Proof}
+ Для $\forall a_j \in \A$  $\exists \d_j \in (0,+\infty)$. Обозначим $\D = \{\d_1,\dots,\d_N\}$, а $|\D| = {\max_{j=1,\dots,N}} \{\d_j\}$.\\
+ Пусть $\exists \d > 0 \colon$  при $|\D| < \d$ круги $\{B(a_j,\d_j)\}_{j=0}^N$ "--- попарно не пересекаются, соответственно определим $\g_{\d_j}^{+}(a_j)$.\\ 
+ Положим $D_{\A\D} = D\diagdown \bigsqcup\limits_{j=1}^N \ol{B(a_j,\d_j)}$ "--- допустимая область в $\C$. \\
+ Очевидно, что $f \in A(D_{\A\D}) \cap C(\ol{D_{\A\D}})$.\\
+ Пусть $\A' = \A \cap \partial D = \{a_1,\dots,a_J\}$, где $J \le N$ и $\infty = a_J$, если $\infty \in \partial D$.\\
+ Пускай $\GG_{\A'\D'} = \partial^{+} D\diagdown \bigsqcup\limits_{j=1}^J {B(a_j,\d_j)}$, где $\D' = \{\d_1,\dots,\d_J\}$.\\
+ Значит, $\partial^{+} D_{\A\D} = \GG_{\A'\D'} \cap \bigsqcup\limits_{j=1}^N \g_{\d_j}^{-}(a_j)$.\\
+ Тогда по интегральной теореме Коши:
+ \[
+0 = \Gint{\partial^{+} D_{\A\D}} f(z)dz =\underbrace{\Gint{\GG_{\A'\D'}} f(z)dz}_{(vp)\Gint{\partial^{+} D} f(z)dz} - \sum\limits_{j=1}^{N} \underbrace{\Gint{\g_{\d_j}^{+}(a_j)} f(z)dz}_{2\pi i\res\limits_{a_j,D} f(z) }.
+ \]
+\end{Proof}
