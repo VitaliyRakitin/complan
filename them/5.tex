@@ -1,2 +1,100 @@
 \newpage
 \section{Теорема о логарифмических вычетах. Принцип аргумента.}
+
+\subsection{Логарифмические вычеты.}
+\begin{Def}
+Пусть $a \in \ol{\C}$, $f$ "--- голоморфна в некоторой $B'(a,\d)$, причём $f(z) \not= 0$ в  $B'(a,\d)$, тогда
+\[
+\res\limits_{a} \frac{f'}{f} =: \Lres\limits_{a} f,
+\]
+"--- \underline{логорифмический вычет функции $f$ в точке $a$}.
+\end{Def}
+
+\begin{Ut}
+Пусть $a \in \C$ "--- ноль функции порядка $n \ge 0$, тогда $\Lres\limits_{a} f = n$.
+\end{Ut}
+\begin{Proof}
+По теорее о нулях $\exists g(z) \in A(B(a,\d)) \colon g(a) \not = 0, f(z) = (z-a)^n g(z)$.
+Тогда 
+\[ 
+\frac{f'(z)}{f(z)} = \frac{n(z-a)^{n-1} g(z)}{(z-a)^n g(z)} + \frac{(z-a)^n g'(z)}{(z-a)^n g(z)} = \frac{n}{z-a} + \frac{g'(z)}{g(z)}, 
+\]
+где последнее слагаемое голоморфно в окрестности точки $a$. Значит $C_{-1} = n = \res\limits_{a} \frac{f'}{f}$
+\end{Proof}
+
+
+\begin{Ut}
+Пусть $a \in \C$ "--- полюс функции порядка $p \ge 1$, тогда $\Lres\limits_{a} f = -p$.
+\end{Ut}
+\begin{Proof}
+Если $a$ "--- полюс $f$ порядка $p$, тогда $g(z) = \frac{1}{f(z)}$ имеет в точке $a$ нуль порядка $p$. \\Так как $\frac{f'}{f} = - \frac{g'}{g} - \frac{p}{z-a}$, тогда $\res\limits_{a} \frac{f'}{f} = -p$.
+\end{Proof}
+
+\begin{The}[О логарифмических вычетах]
+Пусть $D$ "--- допустимая область в $\C$. Пусть $f$ имеет в $D$ нули $a_1,\dots,a_N$ порядков $n_1,\dots,n_N$ (соответственно) и полюса $b_1,\dots,b_M$ порядков $p_1,\dots,p_M$ (соответственно).
+При этом $f$ голоморфна ещё и в некоторой окрестности границы $\partial D$ и не имеет на самой границе ни нулей ни полюсов. 
+Тогда 
+\[
+\frac{1}{2\pi i} 
+\Gint{\partial^{+}D} 
+\frac{f'(z)}{f(z)} dz = 
+N_D(f) - P_D(f),
+\]
+где $N_D(f) = n_1 + \dots + n_N$ "--- общее число нулей $f$ в $D$, 
+а $P_D(f) = p_1 + \dots + p_M$ "--- обшее число полюсов $f$ в $D$.
+\end{The}
+\begin{Proof}
+По теореме Коши о вычетах$\colon$
+\[
+\frac{1}{2\pi i} \Gint{\partial^{+}D} \frac{f'(z)}{f(z)} dz = 
+\sum\limits_{n=1}^{N} \res\limits_{a_n} \frac{f'}{f} + 
+\sum\limits_{m=1}^{M} \res\limits_{b_m} \frac{f'}{f}
+\]
+из утверждений (1) и (2) следует необходимое равенство теоремы.
+\end{Proof}
+
+\subsection{Принцип аргумента.}
+\begin{Def}
+Пусть $\gamma\colon [\a,\b] \to \C$ "--- путь, $f \in C([\gamma]), f(z) \not= 0$ для $\forall z \in [\gamma]$, \\тогда возникает $\sigma(t) = f(\gamma(t))\Big|_{[\a,b]}$ (не проходит через 0).\\
+$\D_{\sigma} Arg(w) \equiv \D_{\gamma} Arg(f)$ "--- \underline{приращение (полярного)  аргумента функции $f$ вдоль $\gamma$}.
+\end{Def}
+
+\begin{Lem}
+Пусть $\GG$ "--- допустимая замкнутая (то есть КГ) кривая в $\C$, функция $f$ голоморфна в некоторой окрестности $U([\Gamma])$ и $f \not= 0$ на $[\Gamma]$. Тогда
+\[
+\frac{1}{2\pi i} \Gint{\GG} \frac{f'(z)}{f(z)} = \frac{1}{2\pi} \D_{\GG} Arg(f).
+\]
+\end{Lem}
+\begin{Proof}
+Пусть $\gamma \colon [\a,\b] \to \C$ "--- представитель $\GG$ ($[\gamma] = [\GG]$), a
+$\sigma = f \circ g$ "--- это путь, не проходящий через 0.
+Значит можно разбить отрезок $[\a,\b]$ на подотрезки $I_l = [\a_{l-1},\a_{l}]$ ($l = 1,\dots,L$) с услоивем, что пути $\sigma_{l} = f \circ g \Big |_{I_l}$ лежат в одной из областей $\C_l = C_{-}$ или $\C_{+}$.
+Можно найти окрестности $U_l$ носителей путей $\gamma_l = \gamma \big|_{I_l}$, для которых $f \in A(U_l)$ и $f(U_l) \subset \C_l$, значит для $ \forall l$ $\exists$ ветвь $\log\limits_{(l)} w$ в $\C_l\colon$\\
+$\frac{f'(z)}{f(z)} =  \left(\log\limits_{(l)}\left(f(z)\right)\right)'$, $f(z)$ "--- определена в $U_l$.
+Имеем, 
+\[
+\frac{1}{2\pi i} \Gint{\gamma}\frac{f'(z)}{f(z)} dz \overset{\text{ф. Н-Л.}}=
+\frac{1}{2\pi i} \sum\limits_{l=1}^{L} \underbrace{\log\limits_{(l)}f(z)}_{= \log|f(z)| + i \arg\limits_{(l)} f(z)} \Big |_{\gamma(\a_{l-1})}^{\gamma(a_l)} =
+\]
+\[
+= \underbrace{\frac{1}{2\pi i} \sum\limits_{l=1}^{L} \log |f(z)|}_{\to 0 \text{(т.к. $\gamma$ - замкнута)}} \Big |_{\gamma(\a_{l-1})}^{\gamma(a_l)} 
++ \frac{1}{2\pi} \sum\limits_{l=1}^{L} \arg\limits_{(l)}f(z) \Big |_{\gamma(\a_{l-1})}^{\gamma(a_l)} =  \frac{1}{2\pi} Arg(f).
+\]
+
+\end{Proof}
+
+\begin{The}[Принцип аргумента]
+В условях теоремы о логарифмических вычетах справедлива формула
+\[
+N_D(f) - P_D(f) = \frac{1}{2\pi} \D_{\partial^{+}D} Arg(f),\qquad
+\text{где } \partial^{+}D = \GG_1 \sqcup \Gamma_2^{-}\sqcup \dots \sqcup \Gamma_s^{-}.
+\]
+Тогда выполняется соотношение
+\[
+\D_{\partial^{+}D} Arg(f) = \D_{\GG_1} Arg(f) - \sum\limits_{i = 1}^{s} \D_{\GG_i} Arg(f).
+\]
+
+\end{The}
+\begin{Proof}
+Вытекает из леммы.
+\end{Proof}
